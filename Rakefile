@@ -12,16 +12,26 @@ end
 require 'rake'
 
 require 'jeweler'
+
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "capistrano-thin"
   gem.homepage = "http://github.com/ismailfaruqi/capistrano-thin"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Thin-related tasks for Capistrano 3}
+  gem.description = %Q{Thin-related tasks for Capistrano 3}
   gem.email = "ismailfaruqi@gmail.com"
   gem.authors = ["Ismail Faruqi"]
   # dependencies defined in Gemfile
+  gem.files = `git ls-files`.split($/)
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ["lib"]
+  gem.add_dependency 'capistrano', '~> 3.0'
+  gem.add_dependency 'sshkit', '~> 1.2'
+
 end
 Jeweler::RubygemsDotOrgTasks.new
 
@@ -32,13 +42,13 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
+# require 'rcov/rcovtask'
+# Rcov::RcovTask.new do |test|
+#   test.libs << 'test'
+#   test.pattern = 'test/**/test_*.rb'
+#   test.verbose = true
+#   test.rcov_opts << '--exclude "gems/*"'
+# end
 
 task :default => :test
 
