@@ -1,10 +1,14 @@
 namespace :thin do
 
+	set :thin_config_path, ""
+
 	desc "Start the Thin server"
 	task :start do
 		on roles :app do
       		within release_path do
-        		execute :bundle, "exec thin start -C /etc/thin/sites/cbsn-core.yml"
+      			config_string = fetch(:thin_config_path).blank? ? "" : " -C #{fetch(:thin_config_path)}"
+      			env_string = fetch(:rails_env).blank? ? "" : " -e #{fetch(:rails_env)}"
+      			execute :bundle, "exec thin start".merge(env_string).merge(config_string)
       		end      
     	end
 	end
@@ -13,7 +17,9 @@ namespace :thin do
 	task :stop do
 		on roles :app do
       		within release_path do
-        		execute :bundle, "exec thin stop -C /etc/thin/sites/cbsn-party-planning.yml"
+      			config_string = fetch(:thin_config_path).blank? ? "" : " -C #{fetch(:thin_config_path)}"
+      			env_string = fetch(:rails_env).blank? ? "" : " -e #{fetch(:rails_env)}"
+      			execute :bundle, "exec thin stop".merge(env_string).merge(config_string)
       		end
     	end
 	end
@@ -22,12 +28,14 @@ namespace :thin do
 	task :restart do
 		on roles :app do
       		within release_path do
-        		execute :bundle, "exec thin restart -C /etc/thin/sites/cbsn-core.yml"
+      			config_string = fetch(:thin_config_path).blank? ? "" : " -C #{fetch(:thin_config_path)}"
+      			env_string = fetch(:rails_env).blank? ? "" : " -e #{fetch(:rails_env)}"
+      			execute :bundle, "exec thin restart".merge(env_string).merge(config_string)
       		end      
     	end
 	end
 
-	desc "Checks whether a Thin server is already installed or not"
+	desc "Checks whether a Thin server is already running or not"
 	task :check do
 		test("[ -d thin ]")
 	end
