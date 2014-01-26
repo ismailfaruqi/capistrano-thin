@@ -35,9 +35,6 @@ namespace :thin do
     	end
 	end
 
-	desc "Checks whether a Thin server is already running or not"
-	task :check do
-		test("[ -d thin ]")
-	end
+	after 'deploy:finished', 'thin:restart'
 
 end

@@ -1,6 +1,33 @@
-= capistrano-thin
+capistrano-thin
+===============
 
-Description goes here.
+Thin-related tasks for Capistrano 3.
+
+Requirements
+------------
+
+Make sure that
+
+```
+gem 'capistrano'
+gem 'capistrano-bundler'
+```
+
+is present inside your **Gemfile**.
+
+Installation
+
+Use the following lines for **Rubygems**:
+
+```ruby
+gem install capistrano-thin
+```
+
+or insert the following line into your __Gemfile__ for **Bundler**:
+
+```ruby
+gem "capistrano-thin"
+```
 
 == Contributing to capistrano-thin
  
