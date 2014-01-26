@@ -30,6 +30,12 @@ or insert the following line into your __Gemfile__ for **Bundler**:
 gem "capistrano-thin"
 ```
 
+Then, open your Capfile and add the following line:
+
+```ruby
+require 'capistrano/thin'
+```
+
 Contributing to capistrano-thin
 -------------------------------
  
