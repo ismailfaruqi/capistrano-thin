@@ -27,7 +27,7 @@ gem install capistrano-thin
 or insert the following line into your __Gemfile__ for **Bundler**:
 
 ```ruby
-gem "capistrano-thin"
+gem "capistrano-thin", :github => "ismailfaruqi/capistrano-thin"
 ```
 
 Then, open your Capfile and add the following line:
